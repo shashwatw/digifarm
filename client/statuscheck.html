@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<br>
+    <head>
+        <title>Digifarm - Status</title>
+		<link rel="icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="farmer.css">
+		<link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&display=swap" rel="stylesheet">
+        <script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
+        </head>
+			<body>
+				<section>
+					<div class="color"></div>
+					<div class="color"></div>
+					<div class="color"></div>
+					<div class="container">
+						<div class="form">
+				<h2>FARMER PORTAL - STATUS CHECK</h2>
+						<button onclick="connectMetamask()" class="forBox" > Connect wallet </button></br>
+						<p id="accountArea" style="color: #CFD2CF"> No connection </p><br>
+			
+						<button onclick="connectContract()" class="forBox" > Connect contract </button></br>
+						<p id="contractArea" style="color: #CFD2CF"> No connection </p>
+			
+						
+						<br>
+						<div class="inputbox">
+						<input type="text" id="farm"/ placeholder="Aadhar Number"><br><br>
+						<button onclick="getFarmer()" class="forBox"><center>Check Status </center> </button></br><br>
+						<p class = "checkStatus" id = "forInfo" style="color: #CFD2CF">Check your details!</p></div>
+					</section>
+			</body>
+
+            <br>
+
+            <script>
+                let account;
+                const connectMetamask = async()=>{
+                    if(window.ethereum !== "undefined") {
+                    const accounts = await ethereum.request({
+                        method: "eth_requestAccounts"
+                    });
+                    account = accounts[0];
+                }
+
+                document.getElementById("accountArea").innerHTML = `Connected with ${account}`;
+                }
+
+                const connectContract = async()=>{
+                    const ABI = [
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "aadharNo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "mobileNo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "crop",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "produce",
+				"type": "string"
+			}
+		],
+		"name": "addFarmer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "aadharNo",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bool",
+				"name": "acceptOrReject",
+				"type": "bool"
+			}
+		],
+		"name": "changeStatus",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "aadharNo",
+				"type": "uint256"
+			}
+		],
+		"name": "getFarmer",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "aadharNo",
+				"type": "uint256"
+			}
+		],
+		"name": "getstatus",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+];   
+const address = "0xCB580E8fcA99aB7e23365fAa36A8Bd2cF09Ad18D";
+
+                    window.web3 = await new Web3(window.ethereum);
+                    window.contract = await new web3.eth.Contract(ABI, address);
+
+                    document.getElementById("contractArea").innerHTML = `Connected to the contract successfuly!`;
+
+                };
+
+                const getFarmer = async()=>{
+                    const sankhya = document.getElementById("farm").value;
+                    const farmer = await contract.methods.getFarmer(sankhya).call();
+                    document.getElementById("forInfo").innerHTML = `Status: ${farmer[4]}`;
+                }
+                
+            </script>
+        </body>
+</html>
