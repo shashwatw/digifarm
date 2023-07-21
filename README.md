@@ -2,7 +2,10 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/99785671/192709635-927516d5-6588-4e88-bdfd-3de05c699fa9.png" />
 </p>
- 
+
+## BLOCKCHAIN-BASED PORTAL:DIGIFARM
+Live Website - digifarm-dun.vercel.app
+
 ## 📄 ABSTRACT
 Blockchain can preserve an incorruptible, decentralised, and transparent record of all the data, and so it is a great fit for for all kinds of applications. Furthermore, on one side, blockchain is a transparent system, but it is also private, hiding any individual's identity behind complicated and secure codes that can preserve the sensitivity of the data. The technology's decentralised shape also enables the farmers and the goverment to communicate the same information in a secure and timely manner without the unnecessary involvement of people in between who are likely to manipulate the information.
 
